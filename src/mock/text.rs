@@ -8,21 +8,8 @@ pub struct MockParagraphFn;
 impl MockFn for MockParagraphFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
         let lang = args.as_ref().and_then(|args| args.first());
-        let (min, max) = args
-            .as_ref()
-            .and_then(|args| args.get(1))
-            .map(|args| {
-                let opts = args
-                    .split('~')
-                    .map(|v| v.trim().parse::<u8>().ok())
-                    .collect::<Vec<Option<u8>>>();
-                let min = opts.get(0).map(|v| v.unwrap()).unwrap_or(3);
-                let max = opts.get(1).map(|v| v.unwrap()).unwrap_or(10);
-                (min, max)
-            })
-            .unwrap_or((3, 10));
         let mut rng = rand::thread_rng();
-        let count = rng.gen_range(min..=max);
+        let count = rng.gen_range(3..=10);
         match lang {
             Some(&"cn") => {
                 let mut ts = vec![];

@@ -58,7 +58,7 @@ The above code will return a `serde_json::Value`, and after calling `val.to_stri
 ```
 
 ### Generating a List of Data
-To generate a list of data, you can use the format `[json, min, max]`, which generates a number of data greater than `min` and less than `max`.
+To generate a list of data, you can use the format `[serde_json::Value, min, max]`, which generates a number of data greater than `min` and less than `max`.
 ```rust
  let val = mock(&json!([{"user_name": "@Name", "email": "@Email", "age":"@Number|18~100"}, 2, 5]));
 ```
@@ -169,6 +169,12 @@ mock(&json!("@Url")); // String("https://mqezx.rpmy.int/gevc")
 
 // Customize the URL protocol
 mock(&json!("@Url|ftp")); // String("ftp://qjwb.wpukq.gov/tmkwq")
+```
+#### @Token
+Randomly generates a token
+
+```rust
+mock(&json!("@Token")); // String("htK5pesIqPTJYK8Yn286.RG0mgC0vHPlQU7SnxWx3.fHsemPcj43bEY0hJSSfJ")
 ```
 
 #### @Email
@@ -317,6 +323,36 @@ Randomly generates a color in HSL format.
 ```rust
 mock(&json!("@HSL")); //String("hsl(343,50,32)")
 ```
+
+#### @Paragraph
+Randomly generates a paragraph. To generate a Chinese paragraph, pass in `cn`.
+
+```rust
+mock(&json!("@Paragraph")); // String("eetcttp jekaveq uwzkl abzciz bquijz biq ajfbnsjx ljmy khx,..., iilxxy mudlb xjz eipnm wnuc, takktis dus vwmubs ysckswn bju uffje.")
+
+// Chinese paragraph
+mock(&json!("@Paragraph|cn")); // String("却国华资称被素火用几花放西等，...，层间者场当族表眼日技里度，际感高一声新历院器火常问书则如。")
+```
+
+#### @Sentence
+Randomly generates a sentence, To generate a Chinese sentence, pass in `cn`
+```rust
+mock(&json!("@Sentence")); //String("zcdh yiui qymurgx szaydjv yfb tkj znpeyy muzwrs okihyo")
+
+// Chinese sentence
+mock(&json!("@Sentence|cn")) // String("型有件次一通说存克这半确毛由")
+```
+
+#### @Title
+Randomly generates a title. To generate a Chinese title, pass in `cn`. It is similar to `@Sentence`.
+
+```rust
+mock(&json!("@Title")); // String("fivms iiqq kdvyojq mibvzkx efhi six zpogksf")
+
+// Chinese title
+mock(&json!("@Title|cn")); // String("别话省报回京老住基")
+```
+<br/>
 
 #### Register your `placeholders`
 The above are all the `placeholders` currently available. You can also register your own `placeholders` through the `registry` function, it must implements the `MockFn` trait. However, you cannot register `placeholders` that already exist. Although there is no strict naming convention for `placeholders`, it is still recommended to use camel case. Except for abbreviations like `RGB`. <br/><br/>

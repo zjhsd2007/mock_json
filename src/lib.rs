@@ -239,6 +239,14 @@ mod tests {
 
     #[test]
     fn it_works() {
+        dbg!(mock(&json!("@Token")));
+        dbg!(mock(&json!("@Paragraph")));
+        dbg!(mock(&json!("@Paragraph|cn")));
+        dbg!(mock(&json!("@Sentence")));
+        dbg!(mock(&json!("@Sentence|cn")));
+        dbg!(mock(&json!("@Title")));
+        dbg!(mock(&json!("@Title|cn")));
+
         let val = mock(&json!({
             "code":0,
             "msg":"just text",
