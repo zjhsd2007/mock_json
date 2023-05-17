@@ -1,0 +1,59 @@
+[
+  {
+    "name":"Alaska",
+    "sub": [
+      {
+        "name":"Anchorage",
+        "sub": [
+          {
+            "name":"2140 East 56th Avenue"
+          },
+          {
+            "name":"16820 Coronado Street"
+          },
+          {
+            "name":"2454 Kidd Avenue"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name":"Arizona",
+    "sub": [
+      {
+        "name":"Phoenix",
+        "sub": [
+          {
+            "name":"3653 Skips Lane"
+          },
+          {
+            "name":"1454 Cambridge Drive"
+          },
+          {
+            "name":"1427 Elmwood Avenue"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name":"Colorado",
+    "sub": [
+      {
+        "name":"Denver",
+        "sub": [
+          {
+            "name":"3295 Shobe Lane"
+          },
+          {
+            "name":"3389 Whispering Pines Circle"
+          },
+          {
+            "name":"943 Leo Street"
+          }
+        ]
+      }
+    ]
+  }
+]
