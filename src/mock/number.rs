@@ -9,12 +9,17 @@ impl MockFn for MockNumberFn {
         let mut min = 0_i64;
         let mut max = 1000_i64;
         if let Some(args) = args.as_ref().and_then(|args| args.first()) {
-            let opts = args.split('~').collect::<Vec<&str>>();
-            if let Some(min_num) = opts.first().and_then(|min_str| min_str.parse::<i64>().ok()) {
-                min = min_num;
+            let opts = args
+                .split('~')
+                .map(|v| v.trim().parse::<i64>())
+                .collect::<Vec<Result<i64, _>>>();
+
+            let mut opts_iter = opts.iter();
+            if let Some(Ok(min_num)) = opts_iter.next() {
+                min = *min_num;
             }
-            if let Some(max_num) = opts.get(1).and_then(|max_str| max_str.parse::<i64>().ok()) {
-                max = max_num;
+            if let Some(Ok(max_num)) = opts_iter.next() {
+                max = *max_num;
             }
         };
         let mut rng = rand::thread_rng();
@@ -29,21 +34,25 @@ impl MockFn for MockFloatFn {
         let precise = args
             .as_ref()
             .and_then(|args| args.first())
-            .and_then(|v| v.parse::<u8>().ok())
+            .and_then(|v| v.trim().parse::<u8>().ok())
             .unwrap_or(2) as f64;
-        let range = args.as_ref().and_then(|args| args.get(1)).map(|v| {
-            let opts = v.split('~').collect::<Vec<&str>>();
-            let min = opts
-                .first()
-                .and_then(|min_str| min_str.parse::<f64>().ok())
-                .unwrap_or(f64::MIN);
-            let max = opts
-                .get(1)
-                .and_then(|max_str| max_str.parse::<f64>().ok())
-                .unwrap_or(f64::MAX);
-            (min, max)
-        });
+
         let p = 10.0_f64.powf(precise.min(5.0));
+
+        let range = args
+            .as_ref()
+            .and_then(|args| args.get(1))
+            .and_then(|sec_arg| {
+                let opts = sec_arg
+                    .split('~')
+                    .map(|v| v.trim().parse::<f64>())
+                    .collect::<Vec<Result<f64, _>>>();
+                let mut opts_iter = opts.iter();
+                match (opts_iter.next(), opts_iter.next()) {
+                    (Some(Ok(min)), Some(Ok(max))) => Some((*min, *max)),
+                    _ => None,
+                }
+            });
         if let Some((min, max)) = range {
             let mut rng = rand::thread_rng();
             let num = rng.gen_range(min..max);

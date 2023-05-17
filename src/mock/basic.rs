@@ -25,7 +25,7 @@ impl MockFn for MockIdFn {
         let len = args
             .as_ref()
             .and_then(|args| args.first())
-            .and_then(|v| v.parse::<u8>().ok())
+            .and_then(|v| v.trim().parse::<u8>().ok())
             .unwrap_or(12);
         json!(pick_str(&ALL_LETTER_POOL, len.into()))
     }

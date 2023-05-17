@@ -127,6 +127,7 @@ Randomly generates a Chinese phone number, no accept params.
 
 ```rust
 mock(&json!("@Phone")); // String("13983370699")
+mock(&json!("@Phone|86")); // String("+86 13545607699")
 ```
 
 #### @Bool

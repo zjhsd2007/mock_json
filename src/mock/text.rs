@@ -14,7 +14,7 @@ impl MockFn for MockParagraphFn {
             .map(|args| {
                 let opts = args
                     .split('~')
-                    .map(|v| v.parse::<u8>().ok())
+                    .map(|v| v.trim().parse::<u8>().ok())
                     .collect::<Vec<Option<u8>>>();
                 let min = opts.get(0).map(|v| v.unwrap()).unwrap_or(3);
                 let max = opts.get(1).map(|v| v.unwrap()).unwrap_or(10);
