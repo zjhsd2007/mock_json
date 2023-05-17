@@ -85,17 +85,17 @@ its content will be
     {
         "age": 43,
         "email": "dbjfm@drgmz.com",
-        "user_name":"Laura White",
+        "user_name":"Laura White"
     },
     {
         "age": 35,
         "email": "fbac@yefq.edu",
-        "user_name":"Frank Hernandez",
+        "user_name":"Frank Hernandez"
     },
     {
         "age": 31,
         "email": "kkhbo@vbqv.cn",
-        "user_name":"Jose Wilson",
+        "user_name":"Jose Wilson"
     }
 ]
 ```

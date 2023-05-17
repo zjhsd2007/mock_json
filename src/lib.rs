@@ -121,7 +121,6 @@ static MOCK_FNS: Lazy<Mutex<MockFns>> = Lazy::new(|| {
     Mutex::new(mock_fns)
 });
 
-
 /// Register custom placeholders, where mock_fn needs to implement the MockFn trait.
 /// ```rust
 ///     use rand::Rng;
@@ -153,6 +152,32 @@ pub fn registry(mock_name: &'static str, mock_fn: impl MockFn + 'static) {
 }
 
 /// mock json
+/// ```rust
+/// use serde_json::json;
+/// use mock_json::mock;
+/// let val = mock(&json!([{"user_name": "@Name", "email": "@Email", "age":"@Number|18~100"}, 2, 5]));
+///  val.to_string();
+/// ```
+/// its content will be
+/// ```json
+/// [
+///     {
+///         "age": 43,
+///        "email": "dbjfm@drgmz.com",
+///         "user_name":"Laura White"
+///     },
+///     {
+///        "age": 35,
+///         "email": "fbac@yefq.edu",
+///         "user_name":"Frank Hernandez"
+///    },
+///     {
+///         "age": 31,
+///         "email": "kkhbo@vbqv.cn",
+///        "user_name":"Jose Wilson"
+///    }
+/// ]
+/// ```
 pub fn mock(val: &Value) -> Value {
     match val {
         Value::String(str) => {
