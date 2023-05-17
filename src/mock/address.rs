@@ -70,6 +70,7 @@ impl Address {
         // 英文地址是倒序的
         if matches!(self.r#type, AddressType::En) {
             str_vec.reverse();
+            return str_vec.join(" ");
         }
         str_vec.join("")
     }

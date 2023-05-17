@@ -63,23 +63,12 @@ The above code will return a `serde_json::Value`, and after calling `val.to_stri
 }
 ```
 
-### Implementation
-The principle is to replace the `placeholders` with the corresponding content. Each `placeholder` starts with `@`, followed by a `placeholder name`, and optional parameters separated by `|`. For example, `@Id` will generate a string of length 12 containing `[a-zA-Z0-9]`. If you want to generate an id of length 5, just use `@Id|5`.
-The return value of each `placeholder` is `serde_json::Value`.
-
-
 ### Generating a List of Data
 To generate a list of data, you can use the format `[json, min, max]`, which generates a number of data greater than `min` and less than `max`.
-
-```rust
-mock(&json!(["@Phone", 1, 4])); //Array [ String("13571232442"), String("13596986592")]
-```
-or
 ```rust
  let val = mock(&json!([{"user_name": "@Name", "email": "@Email", "age":"@Number|18~100"}, 2, 5]));
- val.to_string();
 ```
-its content will be
+then calling `val.to_string()`, its content will be:
 ```json
 [
     {
@@ -99,9 +88,14 @@ its content will be
     }
 ]
 ```
+
+### Implementation
+The principle is to replace the `placeholders` with the corresponding content. Each `placeholder` starts with `@`, followed by a `placeholder name`, and optional parameters separated by `|`. For example, `@Id` will generate a string of length 12 containing `[a-zA-Z0-9]`. If you want to generate an id of length 5, just use `@Id|5`.
+The return value of each `placeholder` is `serde_json::Value`.
+
+
 ### Placeholders
 The default `placeholders` provided are as follows:
-
 
 #### @Guid
 Randomly generates a string in the format of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx, without any parameters.
@@ -259,7 +253,7 @@ mock(&json!("@Zip")); // String("859615")
 Randomly generates an address. Pass in `cn` to generate a Chinese address.
 
 ```rust
-mock(&json!("@Address")); //String("2454 Kidd AvenueAnchorageAlaska")
+mock(&json!("@Address")); //String("2454 Kidd Avenue Anchorage Alaska")
 
 // Generate a Chinese address
 mock(&json!("@Address|cn")); //String("湖北省武汉市汉阳区仙山社区")
