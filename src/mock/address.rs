@@ -24,7 +24,7 @@ impl MockFn for MockZipFn {
 pub struct MockAddressFn;
 impl MockFn for MockAddressFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
-        let lang = args.as_ref().and_then(|args| args.get(0));
+        let lang = args.as_ref().and_then(|args| args.first());
         match lang {
             Some(&"cn") => json!(CN_ADDRESS_DATA.as_ref().unwrap().random()),
             _ => json!(EN_ADDRESS_DATA.as_ref().unwrap().random()),

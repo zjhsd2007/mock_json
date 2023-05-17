@@ -7,7 +7,7 @@ use serde_json::{json, Value};
 pub struct MockParagraphFn;
 impl MockFn for MockParagraphFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
-        let lang = args.as_ref().and_then(|args| args.get(0));
+        let lang = args.as_ref().and_then(|args| args.first());
         let (min, max) = args
             .as_ref()
             .and_then(|args| args.get(1))
@@ -50,7 +50,7 @@ impl MockFn for MockParagraphFn {
 pub struct MockSentenceFn;
 impl MockFn for MockSentenceFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
-        let lang = args.as_ref().and_then(|args| args.get(0));
+        let lang = args.as_ref().and_then(|args| args.first());
         match lang {
             Some(&"cn") => json!(create_word(&CN_LETTER_POOL, 7, 15)),
             _ => json!(create_sentence(&LETTER_POOL, 3, 15)),
@@ -62,7 +62,7 @@ impl MockFn for MockSentenceFn {
 pub struct MockTitleFn;
 impl MockFn for MockTitleFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
-        let lang = args.as_ref().and_then(|args| args.get(0));
+        let lang = args.as_ref().and_then(|args| args.first());
         match lang {
             Some(&"cn") => json!(create_word(&CN_LETTER_POOL, 7, 15)),
             _ => json!(create_sentence(&LETTER_POOL, 4, 8)),

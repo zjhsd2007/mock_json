@@ -8,7 +8,7 @@ impl MockFn for MockDateFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
         let format = args
             .as_ref()
-            .and_then(|args| args.get(0))
+            .and_then(|args| args.first())
             .unwrap_or(&"YYYY-MM-DD");
         let mut rng = rand::thread_rng();
         let year = rng.gen_range(1900..2100);

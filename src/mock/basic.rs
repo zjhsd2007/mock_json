@@ -24,7 +24,7 @@ impl MockFn for MockIdFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
         let len = args
             .as_ref()
-            .and_then(|args| args.get(0))
+            .and_then(|args| args.first())
             .and_then(|v| v.parse::<u8>().ok())
             .unwrap_or(12);
         json!(pick_str(&ALL_LETTER_POOL, len.into()))
@@ -60,7 +60,7 @@ impl MockFn for MockPhoneFn {
                 .unwrap(),
             phone_num
         );
-        return if let Some(prefix) = args.as_ref().and_then(|args| args.get(0)) {
+        return if let Some(prefix) = args.as_ref().and_then(|args| args.first()) {
             json!(format!("+{} {}", prefix, phone_str))
         } else {
             json!(phone_str)

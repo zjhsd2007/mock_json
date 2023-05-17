@@ -22,7 +22,7 @@ impl MockFn for MockUrlFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
         let protocol = args
             .as_ref()
-            .and_then(|args| args.get(0))
+            .and_then(|args| args.first())
             .unwrap_or(&"https");
         json!(format!(
             "{}://{}.{}.{}/{}",
@@ -81,7 +81,7 @@ impl MockFn for MockImageFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
         let size = args
             .as_ref()
-            .and_then(|args| args.get(0))
+            .and_then(|args| args.first())
             .unwrap_or(&"320X240");
         let bg_color = args.as_ref().and_then(|args| args.get(1)).unwrap_or(&"000");
         let fg_color = args.as_ref().and_then(|args| args.get(2)).unwrap_or(&"fff");

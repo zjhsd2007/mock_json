@@ -34,6 +34,8 @@ impl MockFns {
     }
 
     pub fn registry(&mut self, mock_name: &'static str, mock_fn: impl MockFn + 'static) {
-        self.fns.entry(mock_name).or_insert(Box::new(mock_fn));
+        self.fns
+            .entry(mock_name)
+            .or_insert_with(|| Box::new(mock_fn));
     }
 }
