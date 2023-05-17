@@ -1,36 +1,30 @@
 ## Mock JSON
 A very simple and easy-to-use JSON generation tool that supports customizable formats and can be extended with custom `Placeholders`.
 
-### Dependencies
-* serde
-* serde_json
-* rand
-* once_cell
-
 ### Example
 ``` rust
- use mock_json::mock;
- use serde_json::json;
- 
- let val = mock(&json!({
-        "code":0,
-        "msg":"just text",
-        "data":[{
-            "id":"@Id|10",
-            "title": "@Title",
-            "datetime":"@DateTime",
-            "author":{
-                "name":"@Name",
-                "id":"@Guid",
-                "email":"@Email",
-                "id_number":"@IdNumber",
-                "ip":"@Ip",
-                "phones":["@Phone", 1, 3],
-                "blog":"@Url",
-                "avatar":"@Image|80X80|f7f7f7|fff"
-            }
-        }, 5, 20]
-    }));
+use mock_json::mock;
+use serde_json::json;
+
+let val = mock(&json!({
+    "code":0,
+    "msg":"just text",
+    "data":[{
+        "id":"@Id|10",
+        "title": "@Title",
+        "datetime":"@DateTime",
+        "author":{
+            "name":"@Name",
+            "id":"@Guid",
+            "email":"@Email",
+            "id_number":"@IdNumber",
+            "ip":"@Ip",
+            "phones":["@Phone", 1, 3],
+            "blog":"@Url",
+            "avatar":"@Image|80X80|f7f7f7|fff"
+        }
+    }, 5, 20]
+}));
 ```
 
 The above code will return a `serde_json::Value`, and after calling `val.to_string()`, its content will be as follows:

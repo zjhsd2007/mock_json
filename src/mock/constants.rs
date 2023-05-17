@@ -1,5 +1,4 @@
 use once_cell::sync::Lazy;
-use std::iter::Iterator;
 
 pub const STR_POOL: Lazy<Vec<char>> = Lazy::new(|| "abcdefABCDEF0123456789".chars().collect());
 pub const ALL_LETTER_POOL: Lazy<Vec<char>> = Lazy::new(|| {
