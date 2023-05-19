@@ -201,6 +201,34 @@ Randomly generates a domain name, no accept params.
 ```rust
 mock(&json!("@Domain")); // String("hxca.gov")
 ```
+#### @Paragraph
+Randomly generates a paragraph. To generate a Chinese paragraph, pass in `cn`.
+
+```rust
+mock(&json!("@Paragraph")); // String("eetcttp jekaveq uwzkl abzciz bquijz biq ajfbnsjx ljmy khx,..., iilxxy mudlb xjz eipnm wnuc, takktis dus vwmubs ysckswn bju uffje.")
+
+// Chinese paragraph
+mock(&json!("@Paragraph|cn")); // String("却国华资称被素火用几花放西等，...，层间者场当族表眼日技里度，际感高一声新历院器火常问书则如。")
+```
+
+#### @Sentence
+Randomly generates a sentence, To generate a Chinese sentence, pass in `cn`
+```rust
+mock(&json!("@Sentence")); //String("zcdh yiui qymurgx szaydjv yfb tkj znpeyy muzwrs okihyo")
+
+// Chinese sentence
+mock(&json!("@Sentence|cn")) // String("型有件次一通说存克这半确毛由")
+```
+
+#### @Title
+Randomly generates a title. To generate a Chinese title, pass in `cn`. It is similar to `@Sentence`.
+
+```rust
+mock(&json!("@Title")); // String("fivms iiqq kdvyojq mibvzkx efhi six zpogksf")
+
+// Chinese title
+mock(&json!("@Title|cn")); // String("别话省报回京老住基")
+```
 
 #### @Image
 Generates a URL for an image provided by [https://dummyimage.com](https://dummyimage.com). The size, background color, and foreground color can be specified, but it is not possible to define only the background or foreground color.
@@ -324,34 +352,6 @@ Randomly generates a color in HSL format.
 mock(&json!("@HSL")); //String("hsl(343,50,32)")
 ```
 
-#### @Paragraph
-Randomly generates a paragraph. To generate a Chinese paragraph, pass in `cn`.
-
-```rust
-mock(&json!("@Paragraph")); // String("eetcttp jekaveq uwzkl abzciz bquijz biq ajfbnsjx ljmy khx,..., iilxxy mudlb xjz eipnm wnuc, takktis dus vwmubs ysckswn bju uffje.")
-
-// Chinese paragraph
-mock(&json!("@Paragraph|cn")); // String("却国华资称被素火用几花放西等，...，层间者场当族表眼日技里度，际感高一声新历院器火常问书则如。")
-```
-
-#### @Sentence
-Randomly generates a sentence, To generate a Chinese sentence, pass in `cn`
-```rust
-mock(&json!("@Sentence")); //String("zcdh yiui qymurgx szaydjv yfb tkj znpeyy muzwrs okihyo")
-
-// Chinese sentence
-mock(&json!("@Sentence|cn")) // String("型有件次一通说存克这半确毛由")
-```
-
-#### @Title
-Randomly generates a title. To generate a Chinese title, pass in `cn`. It is similar to `@Sentence`.
-
-```rust
-mock(&json!("@Title")); // String("fivms iiqq kdvyojq mibvzkx efhi six zpogksf")
-
-// Chinese title
-mock(&json!("@Title|cn")); // String("别话省报回京老住基")
-```
 <br/>
 
 #### Register your `placeholders`
