@@ -259,13 +259,18 @@ mock(&json!("@Number|-200~-100")); // Number(-147)
 ```
 
 #### @Float
-Generates a floating-point number with a default precision of 2. Accepts parameters to specify precision and value range. The maximum precision is 5, and it is not possible to define only the value range.
+Randomly generates a floating-point number. Accepts two optional parameters. When there is only one parameter, if the parameter contains `~`, it represents the range of values, otherwise, it represents the exact number of decimal places. When there are two parameters, the first parameter represents the exact number of decimal places, and the second parameter represents the range of values.
+
 
 ```rust
+// default precision is 2
 mock(&json!("@Float")); // Number(0.13)
 
 // Specify precision
 mock(&json!("@Float|3")); // Number(0.628)
+
+// Specify value range
+mock(&json!("@Float|100~999")); // Number(123.56)
 
 // Specify precision and value range, it is not possible to define only the value range.
 mock(&json!("@Float|2|100~999")); // Number(131.99)
