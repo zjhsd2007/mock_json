@@ -272,7 +272,7 @@ mock(&json!("@Float|3")); // Number(0.628)
 // Specify value range
 mock(&json!("@Float|100~999")); // Number(123.56)
 
-// Specify precision and value range, it is not possible to define only the value range.
+// Specify precision and value range
 mock(&json!("@Float|2|100~999")); // Number(131.99)
 ```
 

@@ -51,15 +51,15 @@ impl MockFn for MockIdNumberFn {
 pub struct MockPhoneFn;
 impl MockFn for MockPhoneFn {
     fn mock(&self, args: Option<Vec<&str>>) -> Value {
-        let phone_num = pick_str(&NUMBER_POOL, 8);
         let len = PHONE_PREFIX.len() as u8;
-        let phone_str = format!(
-            "{}{}",
-            PHONE_PREFIX
-                .get((rand::random::<u8>() % len) as usize)
-                .unwrap(),
-            phone_num
-        );
+        let phone_str = PHONE_PREFIX
+            .get((rand::random::<u8>() % len) as usize)
+            .map(|v| {
+                let mut phone_str = v.to_string();
+                phone_str.push_str(pick_str(&NUMBER_POOL, 8).as_str());
+                phone_str
+            })
+            .unwrap();
         return if let Some(prefix) = args.as_ref().and_then(|args| args.first()) {
             json!(format!("+{} {}", prefix, phone_str))
         } else {
